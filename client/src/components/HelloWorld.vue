@@ -1,40 +1,50 @@
-<script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
+  <div class="container">
+    <!-- <button @click="testBPAPI">Test Route</button>
+    <p>BE:{{ testDataAPI }}</p> -->
+    <p> HELLO WORLD</p>
+    <button @click="testBPAPIBP">Test Route BP</button>
+    <p>BE:{{ testDataAPIBP }}</p>
+    <button @click="runHopper">Run Hopper</button>
+    <p>BE:{{ hopperResponse }}</p>
+    <Button @click="runHopper" label="Start Hopper" icon="pi pi-file-import"></Button>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      testDataAPIBP: "",
+      testDataAPI: "",
+      hopperResponse: "",
+    };
+  },
+  components: {},
+  methods: {
+    testBPAPIBP: async function () {
+      const path = "/test_api_bp";
+      try {
+        const res = await axios.post(path, {});
+        console.log(res.data);
+        this.testDataAPIBP = res.data;
+      } catch {
+        console.log("error: ");
+      }
+    },
+    runHopper: async function () {
+      const path = "/run_hopper";
+      try {
+        const res = await axios.post(path, {});
+        console.log(res.data);
+        this.hopperResponse = res.data;
+      } catch {
+        console.log("error: ");
+      }
+    },
+  },
+};
+</script>
