@@ -5,7 +5,7 @@ import PrimeVue from 'primevue/config';
 import axios from 'axios'
 //PrimeVue Component Imports
 import Button from 'primevue/button';
-import MenuBar from 'primevue/MenuBar';
+import MenuBar from 'primevue/menubar';
 import 'primevue/resources/themes/md-light-indigo/theme.css'
 import 'primeicons/primeicons.css'
 
