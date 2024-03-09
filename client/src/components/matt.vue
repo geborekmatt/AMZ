@@ -1,8 +1,6 @@
 
 <template>
   <div class="container">
-    <button @click="testBPAPI">Test Route</button>
-    <p>BE:{{ testDataAPI }}</p> 
     <button @click="testBPAPIBP">Test Route BP</button>
     <p>BE:{{ testDataAPIBP }}</p>
     <button @click="runHopper">Run Hopper</button>
