@@ -19,6 +19,6 @@ def index():
     colnames = [desc[0] for desc in cur.description]
     df = pd.DataFrame(data=rows,columns =colnames )
     print(df)
-    conn.close()
+    cur.close()
     print(colnames)
     return "tested api bp"
