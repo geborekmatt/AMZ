@@ -49,7 +49,7 @@
           />
         </template>
         <template #editor="{ data, field }">
-          <div class="pi centered">
+          <div>
             <InputSwitch v-model="data[field]"></InputSwitch
             >{{ data[field] == false ? " No" : " Yes" }}
           </div>
@@ -167,17 +167,17 @@
         />
       </div>
       <div class="field">
-        <p for="gated" class="pi mr-1">Gated</p>
+        <p for="gated" class="mr-1">Gated</p>
         <InputSwitch v-model="newBrand.gated"></InputSwitch
         >{{ newBrand.gated == false ? " No" : " Yes" }}
       </div>
       <div class="field">
-        <p for="possible_ip" class="pi mr-1">Possible IP Complaint</p>
+        <p for="possible_ip" class="mr-1">Possible IP Complaint</p>
         <InputSwitch v-model="newBrand.possible_ip"></InputSwitch
         >{{ newBrand.possible_ip == false ? " No" : " Yes" }}
       </div>
-      <div class="">
-        <p for="disabled" class="pi mr-1">Disabled</p>
+      <div class="field">
+        <p for="disabled" class="mr-1">Disabled</p>
         <InputSwitch v-model="newBrand.disabled"></InputSwitch
         >{{ newBrand.disabled == false ? " No" : " Yes" }}
       </div>
@@ -190,7 +190,9 @@
           autofocus
         />
       </div>
-      <Button @click="addBrand"> Save </Button>
+      <div class="flex align-items-center flex-wrap">
+          <Button class="flex align-items-center justify-content-center" type="button" @click="addBrand"> Create Brand </Button>
+      </div>
     </Dialog>
   </div>
 </template>
@@ -232,26 +234,40 @@ export default {
         const res = await axios.get(path, {});
         this.brands = res.data;
       } catch {
-        this.$toast.add({ severity: 'info', summary: 'Brands Get Request Failed', detail: `See log for details`, life: 3000 });
+        this.$toast.add({
+          severity: "info",
+          summary: "Brands Get Request Failed",
+          detail: "See log for details",
+          life: 3000,
+        });
       }
     },
     addBrand: async function () {
       const path = "/brands/add";
       try {
         const res = await axios.post(path, { newData: this.newBrand });
-        this.isAddBrandActive = !this.isAddBrandActive
-        this.newBrand =
-          {
-            name: "",
-            gated: false,
-            possible_ip: false,
-            disabled: false,
-            aliases: "",
-          };
-          this.$toast.add({ severity: 'success', summary: 'Brand Added', detail: '', life: 1000 });
+        this.isAddBrandActive = !this.isAddBrandActive;
+        this.newBrand = {
+          name: "",
+          gated: false,
+          possible_ip: false,
+          disabled: false,
+          aliases: "",
+        };
+        this.$toast.add({
+          severity: "success",
+          summary: "Brand Added",
+          detail: "",
+          life: 1000,
+        });
         this.getBrands();
-      } catch(err) {
-        this.$toast.add({ severity: 'info', summary: 'Brand Add Request Failed', detail: 'See log for details', life: 3000 });
+      } catch (err) {
+        this.$toast.add({
+          severity: "info",
+          summary: "Brand Add Request Failed",
+          detail: "See log for details",
+          life: 3000,
+        });
       }
     },
     onRowEditSave: async function (event) {
@@ -260,9 +276,19 @@ export default {
         let { newData, index } = event;
         const res = await axios.post(path, { newData });
         this.getBrands();
-        this.$toast.add({ severity: 'success', summary: 'Brand Edited', detail: '', life: 1000 });
+        this.$toast.add({
+          severity: "success",
+          summary: "Brand Edited",
+          detail: "",
+          life: 1000,
+        });
       } catch {
-        this.$toast.add({ severity: 'info', summary: 'Brand Edit Request Failed', detail: 'See log for details', life: 3000 });
+        this.$toast.add({
+          severity: "info",
+          summary: "Brand Edit Request Failed",
+          detail: "See log for details",
+          life: 3000,
+        });
       }
     },
     deleteBrand: async function (id) {
@@ -270,9 +296,19 @@ export default {
       try {
         const res = await axios.post(path, { id: id });
         this.getBrands();
-        this.$toast.add({ severity: 'success', summary: 'Brand Deleted', detail: '', life: 1000 });
+        this.$toast.add({
+          severity: "success",
+          summary: "Brand Deleted",
+          detail: "",
+          life: 1000,
+        });
       } catch {
-        this.$toast.add({ severity: 'info', summary: 'Brand Delete Request Failed', detail: 'See log for details', life: 3000 });
+        this.$toast.add({
+          severity: "info",
+          summary: "Brand Delete Request Failed",
+          detail: "See log for details",
+          life: 3000,
+        });
       }
     },
   },
