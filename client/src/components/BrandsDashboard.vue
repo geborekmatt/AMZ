@@ -198,7 +198,6 @@
   <script>
 import axios from "axios";
 import { FilterMatchMode } from "primevue/api";
-
 export default {
   data() {
     return {
@@ -233,14 +232,14 @@ export default {
         const res = await axios.get(path, {});
         this.brands = res.data;
       } catch {
-        console.log("error: ");
+        this.$toast.add({ severity: 'info', summary: 'Brands Get Request Failed', detail: `See log for details`, life: 3000 });
       }
     },
     addBrand: async function () {
       const path = "/brands/add";
       try {
         const res = await axios.post(path, { newData: this.newBrand });
-        this.newBrand ==
+        this.newBrand =
           {
             name: "",
             gated: false,
@@ -249,8 +248,8 @@ export default {
             aliases: "",
           };
         this.getBrands();
-      } catch {
-        console.log("error: ", res.data.error);
+      } catch(err) {
+        this.$toast.add({ severity: 'info', summary: 'Brand Add Request Failed', detail: `See log for details`, life: 3000 });
       }
     },
     onRowEditSave: async function (event) {
@@ -260,7 +259,7 @@ export default {
         const res = await axios.post(path, { newData });
         this.getBrands();
       } catch {
-        console.log("error: ");
+        this.$toast.add({ severity: 'info', summary: 'Brand Edit Request Failed', detail: `See log for details`, life: 3000 });
       }
     },
     deleteBrand: async function (id) {
@@ -269,7 +268,7 @@ export default {
         const res = await axios.post(path, { id: id });
         this.getBrands();
       } catch {
-        console.log("error: ");
+        this.$toast.add({ severity: 'info', summary: 'Brand Delete Request Failed', detail: `See log for details`, life: 3000 });
       }
     },
   },

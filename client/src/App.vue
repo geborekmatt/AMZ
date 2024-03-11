@@ -6,6 +6,7 @@
     <div>
       <RouterView />
     </div>
+    <Toast />
   </div>
 </template>
 <script>
