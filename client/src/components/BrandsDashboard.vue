@@ -239,6 +239,7 @@ export default {
       const path = "/brands/add";
       try {
         const res = await axios.post(path, { newData: this.newBrand });
+        this.isAddBrandActive = !this.isAddBrandActive
         this.newBrand =
           {
             name: "",
