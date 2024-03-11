@@ -247,9 +247,10 @@ export default {
             disabled: false,
             aliases: "",
           };
+          this.$toast.add({ severity: 'success', summary: 'Brand Added', detail: '', life: 1000 });
         this.getBrands();
       } catch(err) {
-        this.$toast.add({ severity: 'info', summary: 'Brand Add Request Failed', detail: `See log for details`, life: 3000 });
+        this.$toast.add({ severity: 'info', summary: 'Brand Add Request Failed', detail: 'See log for details', life: 3000 });
       }
     },
     onRowEditSave: async function (event) {
@@ -258,8 +259,9 @@ export default {
         let { newData, index } = event;
         const res = await axios.post(path, { newData });
         this.getBrands();
+        this.$toast.add({ severity: 'success', summary: 'Brand Edited', detail: '', life: 1000 });
       } catch {
-        this.$toast.add({ severity: 'info', summary: 'Brand Edit Request Failed', detail: `See log for details`, life: 3000 });
+        this.$toast.add({ severity: 'info', summary: 'Brand Edit Request Failed', detail: 'See log for details', life: 3000 });
       }
     },
     deleteBrand: async function (id) {
@@ -267,8 +269,9 @@ export default {
       try {
         const res = await axios.post(path, { id: id });
         this.getBrands();
+        this.$toast.add({ severity: 'success', summary: 'Brand Deleted', detail: '', life: 1000 });
       } catch {
-        this.$toast.add({ severity: 'info', summary: 'Brand Delete Request Failed', detail: `See log for details`, life: 3000 });
+        this.$toast.add({ severity: 'info', summary: 'Brand Delete Request Failed', detail: 'See log for details', life: 3000 });
       }
     },
   },
