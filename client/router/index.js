@@ -1,6 +1,6 @@
-HelloWorld
 import { createRouter, createWebHistory } from 'vue-router'
 import matt from '../src/components/matt.vue'
+import BrandsDashboard from '../src/components/BrandsDashboard.vue'
 import HelloWorld from '../src/components/HelloWorld.vue'
 
 const router = createRouter({
@@ -15,6 +15,11 @@ const router = createRouter({
       path: '/hw',
       name: 'HelloWorld',
       component: HelloWorld,
+    },
+    {
+      path: "/brands",
+      name: 'BrandsDashboard',
+      component: BrandsDashboard,
     }
   ]
 })

@@ -1,11 +1,12 @@
 <template>
   <div>
     <div>
-      <MenuBar :model="items" />
+      <MenuBar  :model="items" />
     </div>
     <div>
       <RouterView />
     </div>
+    <Toast />
   </div>
 </template>
 <script>
@@ -28,6 +29,14 @@ export default {
                         this.$router.push('/hw');
                     }
         },
+        {
+          label: "Brands",
+          icon: "pi pi-save",
+          visible: true,
+          command: () => {
+                        this.$router.push('/brands');
+                    }
+        },
       ],
     };
   },
@@ -35,3 +44,5 @@ export default {
   },
 };
 </script>
+<style scoped> 
+</style>
