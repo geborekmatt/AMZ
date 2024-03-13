@@ -168,3 +168,5 @@ dist
 .env
 .env.production
 .vscode/
+celerybeat-schedule
+dump.rdb
