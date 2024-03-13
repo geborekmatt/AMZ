@@ -36,7 +36,6 @@ def api_task(self):
 
 @celery.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Executes every Monday morning at 7:30 a.m.
     sender.add_periodic_task(60, api_task.s()
     )
 
