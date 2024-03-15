@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <MenuBar  :model="items" />
+      <MenuBar class="bg-primary" :model="items" />
     </div>
     <div>
       <RouterView />
@@ -22,11 +22,11 @@ export default {
           }
         },
         {
-          label: "HW",
-          icon: "pi pi-save",
+          label: "Hopper",
+          icon: "pi pi-funnel",
           visible: true,
           command: () => {
-                        this.$router.push('/hw');
+                        this.$router.push('/hopper');
                     }
         },
         {
