@@ -29,15 +29,15 @@
         </template>
       </Column>
       <Column
-        filterField="gated"
-        field="gated"
-        header="Gated"
+        filterField="approved"
+        field="approved"
+        header="Approved"
         sortable
         filter
         width="10%"
       >
         <template #body="{ data }">
-          {{ data.gated }}
+          {{ data.approved }}
         </template>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
@@ -50,8 +50,8 @@
         </template>
         <template #editor="{ data, field }">
           <div>
-            <InputSwitch v-model="data[field]"></InputSwitch
-            >{{ data[field] == false ? " No" : " Yes" }}
+            <InputText v-model="data[field]"></InputText
+            >
           </div>
         </template>
       </Column>
@@ -167,9 +167,9 @@
         />
       </div>
       <div class="field">
-        <p for="gated" class="mr-1">Gated</p>
-        <InputSwitch v-model="newBrand.gated"></InputSwitch
-        >{{ newBrand.gated == false ? " No" : " Yes" }}
+        <p for="approved" class="mr-1">Approved</p>
+        <InputText v-model="newBrand.approved"></InputText
+        >
       </div>
       <div class="field">
         <p for="possible_ip" class="mr-1">Possible IP Complaint</p>
@@ -209,14 +209,14 @@ export default {
       isAddBrandActive: false,
       newBrand: {
         name: "",
-        gated: false,
+        approved: null,
         possible_ip: false,
         disabled: false,
         aliases: "",
       },
       filters: {
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-        gated: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        approved: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         possible_ip: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         disabled: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         aliases: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -249,7 +249,7 @@ export default {
         this.isAddBrandActive = !this.isAddBrandActive;
         this.newBrand = {
           name: "",
-          gated: false,
+          approved: null,
           possible_ip: false,
           disabled: false,
           aliases: "",
