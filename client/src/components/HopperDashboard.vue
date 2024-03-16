@@ -2,28 +2,27 @@
   <div>
     <div class="grid">
       <div class="col">
-        <div class="text-center p-5 border-round-md bg-gray-50 font-bold">
+        <div class="text-center p-5 border-round-md font-bold">
           <h2 class="mr-2">Hopper Status</h2>
           <div class="field">
             <label class="mr-2">Input Files Count</label>
-            {{ productsMetrics.unsearched }}
+            {{ hopperStatus.input_file_count }}
           </div>
           <div class="field">
             <label class="mr-2">Added Files Count</label>
-            {{ productsMetrics.excluded }}
+            {{ hopperStatus.added_file_count }}
           </div>
           <div class="field">
             <label class="mr-2">Input Files Product Count</label>
-            {{ productsMetrics.total }}
+            {{ hopperStatus.input_file_product_count }}
           </div>
           <div class="field">
-            <label class="mr-2">Status</label> Stopped
-            <Button> Start Hopper</Button>
+            <Button @click="runHopper"> Start Hopper</Button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="text-center p-5 border-round-md bg-gray-50 font-bold">
+        <div class="text-center p-5 border-round-md font-bold">
           <h2 class="mr-2">Products Metrics</h2>
           <div class="field">
             <label class="mr-2">Total</label> {{ productsMetrics.total }}
@@ -44,12 +43,12 @@
     </div>
     <div class="grid">
       <div class="col">
-        <div class="text-center p-5 border-round-md bg-gray-50 font-bold">
+        <div class="text-center p-5 border-round-md font-bold">
           <h2 class="mr-2">Hopper Config</h2>
           <div class="field">
-            <label class="mr-2">Ignore Disabled Brands</label>
+            <label class="mr-2">Ignore Unapproved Brands</label>
             <InputSwitch
-              v-model="hopperConfig.ignoreDisabledBrands"
+              v-model="hopperConfig.ignoreUnapprovedBrands"
             ></InputSwitch>
           </div>
           <div class="field">
@@ -69,7 +68,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="text-center p-5 border-round-md bg-gray-50 font-bold">
+        <div class="text-center p-5 border-round-md font-bold">
           <h2 class="mr-2">Input Files</h2>
           <DataTable
             tableStyle="min-width: 50rem"
@@ -86,13 +85,7 @@
               field="product_count"
               header="Product Count"
               sortable
-              width="10%"
-            ></Column>
-            <Column
-              field="date_added"
-              header="date_added"
-              sortable
-              width="10%"
+              width="20%"
             ></Column>
           </DataTable>
         </div>
@@ -109,24 +102,15 @@ export default {
     return {
       testDataAPIBP: "",
       testDataAPI: "",
-      hopperResponse: "",
+      hopperStatus: {input_file_count: -1, added_file_count: -1, input_file_product_count: -1},
       hopperConfig: {
-        ignoreDisabledBrands: true,
+        ignoreUnapprovedBrands: true,
         ignorePIPBrands: true,
         ignoreGatedBrands: true,
         includeBrandAliases: true,
       },
       inputFiles: [
-        {
-          name: "Products1.xlsx",
-          product_count: 167,
-          date_added: "2024-01-12",
-        },
-        {
-          name: "Products12.xlsx",
-          product_count: 233,
-          date_added: "2024-01-15",
-        },
+
       ],
       productsMetrics: {
         total: 1000,
@@ -142,7 +126,6 @@ export default {
       const path = "/test_api_bp";
       try {
         const res = await axios.post(path, {});
-        console.log(res.data);
         this.testDataAPIBP = res.data;
       } catch {
         console.log("error: ");
@@ -152,12 +135,35 @@ export default {
       const path = "/run_hopper";
       try {
         const res = await axios.post(path, {});
-        console.log(res.data);
         this.hopperResponse = res.data;
+      } catch {
+        console.log("error: ");
+      }
+      await this.getInputFiles()
+      await this.getHopperStatus()
+    },
+    getInputFiles: async function () {
+      const path = "/input_files";
+      try {
+        const res = await axios.get(path, {});
+        this.inputFiles = res.data;
+      } catch {
+        console.log("error: ");
+      }
+    },
+    getHopperStatus: async function () {
+      const path = "/hopper_status";
+      try {
+        const res = await axios.get(path, {});
+        this.hopperStatus = res.data;
       } catch {
         console.log("error: ");
       }
     },
   },
+  created :async function(){
+    await this.getInputFiles()
+    await this.getHopperStatus()
+  }
 };
 </script>
