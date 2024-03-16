@@ -13,6 +13,7 @@ def get_brands():
         rows = cur.fetchall()
         colnames = [desc[0] for desc in cur.description]
         df = pd.DataFrame(data=rows,columns =colnames )
+        df.approved = df.approved.fillna('')
         cur.close()
         pool.putconn(con) 
         brands = df.to_dict(orient='records')
@@ -32,7 +33,9 @@ def add_brand():
             brand['aliases'] = brand['aliases'].split(",")
         else :
             brand['aliases'] = [""]
-        query = f"INSERT INTO brand (NAME,aliases,gated,possible_ip,disabled) VALUES ('{brand['name']}', ARRAY{brand['aliases']}, {brand['gated']}, {brand['possible_ip']}, {brand['disabled']});"
+        if brand['approved'] == None :
+            brand['approved'] = 'NULL'
+        query = f"INSERT INTO brand (NAME,aliases,approved,possible_ip,disabled) VALUES ('{brand['name']}', ARRAY{brand['aliases']}, {brand['approved']}, {brand['possible_ip']}, {brand['disabled']});"
         cur.execute(query)
         cur.close()
         con.commit()
@@ -51,7 +54,9 @@ def edit_brand():
         brand = payload.get('newData')
         if type(brand['aliases']) == type(""):
             brand['aliases'] = brand['aliases'].split(",")
-        query = f"update brand set name = '{brand['name']}', aliases = ARRAY{brand['aliases']}, gated={brand['gated']}, possible_ip={brand['possible_ip']}, disabled={brand['disabled']} where id = {brand['id']};"
+        if brand['approved'] in ('', None) :
+            brand['approved'] = 'NULL'
+        query = f"update brand set name = '{brand['name']}', aliases = ARRAY{brand['aliases']}, approved = {brand['approved']}, possible_ip={brand['possible_ip']}, disabled={brand['disabled']} where id = {brand['id']};"
         cur.execute(query)
         con.commit()
         pool.putconn(con) 
