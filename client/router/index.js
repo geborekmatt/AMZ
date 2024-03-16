@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import matt from '../src/components/matt.vue'
 import BrandsDashboard from '../src/components/BrandsDashboard.vue'
-import HelloWorld from '../src/components/HelloWorld.vue'
+import HopperDashboard from '../src/components/HopperDashboard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,9 +12,9 @@ const router = createRouter({
       component: matt,
     },
     {
-      path: '/hw',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      path: '/hopper',
+      name: 'HopperDashboard',
+      component: HopperDashboard,
     },
     {
       path: "/brands",

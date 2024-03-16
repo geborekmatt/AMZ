@@ -15,8 +15,12 @@ import InputSwitch from 'primevue/inputswitch';
 import Dialog from 'primevue/dialog';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
+import Splitter from 'primevue/splitter';
+import SplitterPanel from 'primevue/splitterpanel';
 
-import 'primevue/resources/themes/md-light-indigo/theme.css'
+
+// import 'primevue/resources/themes/md-light-indigo/theme.css'
+import 'primevue/resources/themes/aura-light-green/theme.css'
 import 'primeicons/primeicons.css'
 import 'primevue/resources/primevue.min.css';
 import 'primeflex/primeflex.css';
@@ -39,4 +43,6 @@ app.component('InputText', InputText)
 app.component('InputSwitch', InputSwitch)
 app.component('Dialog', Dialog)
 app.component('Toast', Toast)
+app.component('Splitter', Splitter)
+app.component('SplitterPanel', SplitterPanel)
 app.mount('#app')
