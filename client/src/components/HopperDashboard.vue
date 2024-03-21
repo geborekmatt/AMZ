@@ -49,15 +49,22 @@
             <label class="mr-2">Ignore Unapproved Brands</label>
             <InputSwitch
               v-model="hopperConfig.ignoreUnapprovedBrands"
+              disabled
             ></InputSwitch>
           </div>
           <div class="field">
             <label class="mr-2">Ignore PIP Brands</label>
-            <InputSwitch v-model="hopperConfig.ignorePIPBrands"></InputSwitch>
+            <InputSwitch
+              v-model="hopperConfig.ignorePIPBrands"
+              disabled
+            ></InputSwitch>
           </div>
           <div class="field">
-            <label class="mr-2">Ignore Gated Brands</label>
-            <InputSwitch v-model="hopperConfig.ignoreGatedBrands"></InputSwitch>
+            <label class="mr-2">Ignore Disabled Brands</label>
+            <InputSwitch
+              v-model="hopperConfig.ignoreDisabledBrands"
+              disabled
+            ></InputSwitch>
           </div>
           <div class="field">
             <label class="mr-2">Include Brand Aliases</label>
@@ -102,16 +109,18 @@ export default {
     return {
       testDataAPIBP: "",
       testDataAPI: "",
-      hopperStatus: {input_file_count: -1, added_file_count: -1, input_file_product_count: -1},
+      hopperStatus: {
+        input_file_count: -1,
+        added_file_count: -1,
+        input_file_product_count: -1,
+      },
       hopperConfig: {
         ignoreUnapprovedBrands: true,
         ignorePIPBrands: true,
-        ignoreGatedBrands: true,
+        ignoreDisabledBrands: true,
         includeBrandAliases: true,
       },
-      inputFiles: [
-
-      ],
+      inputFiles: [],
       productsMetrics: {
         total: 1000,
         unsearched: 492,
@@ -122,25 +131,16 @@ export default {
   },
   components: {},
   methods: {
-    testBPAPIBP: async function () {
-      const path = "/test_api_bp";
-      try {
-        const res = await axios.post(path, {});
-        this.testDataAPIBP = res.data;
-      } catch {
-        console.log("error: ");
-      }
-    },
     runHopper: async function () {
       const path = "/run_hopper";
       try {
-        const res = await axios.post(path, {});
+        const res = await axios.post(path, { hopperConfig: this.hopperConfig });
         this.hopperResponse = res.data;
       } catch {
         console.log("error: ");
       }
-      await this.getInputFiles()
-      await this.getHopperStatus()
+      await this.getInputFiles();
+      await this.getHopperStatus();
     },
     getInputFiles: async function () {
       const path = "/input_files";
@@ -161,9 +161,9 @@ export default {
       }
     },
   },
-  created :async function(){
-    await this.getInputFiles()
-    await this.getHopperStatus()
-  }
+  created: async function () {
+    await this.getInputFiles();
+    await this.getHopperStatus();
+  },
 };
 </script>
