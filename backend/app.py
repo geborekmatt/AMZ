@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask import send_from_directory
-from brands_bp import brands_bp
-from products_bp import products_bp
+from brands_routes import brands_bp
+from products_routes import products_bp
 from celery import Celery
 import redis
 import task_config
