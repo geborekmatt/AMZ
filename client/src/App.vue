@@ -37,6 +37,14 @@ export default {
                         this.$router.push('/brands');
                     }
         },
+        {
+          label: "Products",
+          icon: "pi pi-save",
+          visible: true,
+          command: () => {
+                        this.$router.push('/products');
+                    }
+        },
       ],
     };
   },
