@@ -1,5 +1,5 @@
-SKU,PRODUCT_URL,PRODUCT_TITLE,Price,Price3
-SKU:C-140-7,https://www.baileypottery.com/c-140-7.html,V-Maxx 2000 Safety Goggles,$11.82 ,
-SKU:C-045-012-1,https://www.baileypottery.com/c-045-012-1.html,Wood Drape Mold 8 in Right Triangle,$10.49 ,$9.44 
-SKU:C-127-XST14,https://www.baileypottery.com/c-127-xst14.html,Xiem Needle Tool for Porcelain,$6.75 ,$5.74 
-SKU:C-127-XST14,https://www.baileypottery.com/c-127-xst14.html,Xiem Needle Tool for Porcelain,$6.75 ,$5.74 
+SKU,PRODUCT_URL,PRODUCT_TITLE,Price,Price3,PRODUCT_BRAND
+SKU:C-140-7,https://www.baileypottery.com/c-140-7.html,V-Maxx 2000 Safety Goggles,$11.82 ,,
+SKU:C-045-012-1,https://www.baileypottery.com/c-045-012-1.html,Wood Drape Mold 8 in Right Triangle,$10.49 ,$9.44 ,
+SKU:C-127-XST14,https://www.baileypottery.com/c-127-xst14.html,Xiem Needle Tool for Porcelain,$6.75 ,$5.74 ,
+SKU:C-127-XST14,https://www.baileypottery.com/c-127-xst14.html,Xiem Needle Tool for Porcelain,$6.75 ,$5.74 ,
