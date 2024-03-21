@@ -63,8 +63,8 @@ def run_hopper():
             con.commit()
             pool.putconn(con) 
 
-        for csv_name in csv_names:
-            replace(f"{path.join(path_to_input_folder,csv_name)}", f"{path.join(path_to_added_input_folder,csv_name)}")
+        # for csv_name in csv_names:
+        #     replace(f"{path.join(path_to_input_folder,csv_name)}", f"{path.join(path_to_added_input_folder,csv_name)}")
         return "Hopper successful",200
     except Exception as e :
         print(e)

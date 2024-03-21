@@ -1,7 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask import send_from_directory
-from brands_bp import brands_bp
+from brands_routes import brands_bp
+from products_routes import products_bp
 from celery import Celery
 import redis
 import task_config
@@ -42,6 +43,7 @@ def setup_periodic_tasks(sender, **kwargs):
 CORS(app, resources={r'/*': {'origins':'*'}})
 app.register_blueprint(brands_bp)
 app.register_blueprint(hopper_bp)
+app.register_blueprint(products_bp)
 @app.route("/", defaults={"path":""})
 @app.route("/<path:path>")
 def index(path):
